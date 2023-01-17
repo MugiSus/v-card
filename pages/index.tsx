@@ -9,8 +9,8 @@ const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
   useEffect(() => {
-    const cardFrontImagePath = location.pathname + '/mugisus-business-card-front-22aq.png';
-    const cardBackImagePath = location.pathname + '/mugisus-business-card-back-22aq.png';
+    const cardFrontImagePath = location.origin + location.pathname + '/mugisus-business-card-front-22aq.png';
+    const cardBackImagePath = location.origin + location.pathname + '/mugisus-business-card-back-22aq.png';
 
     const cardScaleFactor = window.innerWidth < 768 ? 0.5 : 0.7;
 
