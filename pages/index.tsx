@@ -33,7 +33,7 @@ export default function Home() {
       camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
 
-      const cardScaleFactor = window.innerWidth < 425 ? 0.45 : (window.innerWidth < 768 ? 0.6 : 0.75);
+      const cardScaleFactor = window.innerWidth < 425 ? 0.5 : (window.innerWidth < 768 ? 0.65 : 0.8);
       stage.scale.set(cardScaleFactor, cardScaleFactor, cardScaleFactor); 
     }
     resize();
