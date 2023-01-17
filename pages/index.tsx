@@ -135,7 +135,7 @@ export default function Home() {
   }, [])
 
   const redirectHome = () => {
-    window.location.href = 'https://mugisus.com';
+    window.top!.location.href = 'https://mugisus.com';
   }
 
   return (
