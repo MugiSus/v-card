@@ -12,8 +12,6 @@ export default function Home() {
     const cardFrontImagePath = location.origin + location.pathname + '/mugisus-business-card-front-22aq.png';
     const cardBackImagePath = location.origin + location.pathname + '/mugisus-business-card-back-22aq.png';
 
-    let cardScaleFactor = 0.7;
-
     // three.js
     const renderer = new THREE.WebGLRenderer({
       antialias: true,
@@ -35,7 +33,7 @@ export default function Home() {
       camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
 
-      cardScaleFactor = window.innerWidth < 425 ? 0.45 : (window.innerWidth < 768 ? 0.6 : 0.75);
+      const cardScaleFactor = window.innerWidth < 425 ? 0.45 : (window.innerWidth < 768 ? 0.6 : 0.75);
       stage.scale.set(cardScaleFactor, cardScaleFactor, cardScaleFactor); 
     }
     resize();
