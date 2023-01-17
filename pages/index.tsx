@@ -117,7 +117,7 @@ export default function Home() {
 
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.autoRotate = true;
-    controls.autoRotateSpeed = 1;
+    controls.autoRotateSpeed = 0.6;
     controls.enableDamping = true;
     controls.dampingFactor = 0.05;
     controls.update();
