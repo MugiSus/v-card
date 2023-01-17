@@ -116,7 +116,7 @@ export default function Home() {
     controls.autoRotate = true;
     controls.autoRotateSpeed = 0.6;
     controls.enableDamping = true;
-    controls.dampingFactor = 0.05;
+    controls.dampingFactor = 0.04;
     controls.update();
 
     let cardYPos = -2;
