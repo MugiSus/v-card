@@ -12,31 +12,35 @@ export default function Home() {
     const cardFrontImagePath = location.origin + location.pathname + '/mugisus-business-card-front-22aq.png';
     const cardBackImagePath = location.origin + location.pathname + '/mugisus-business-card-back-22aq.png';
 
-    const cardScaleFactor = window.innerWidth < 768 ? 0.5 : 0.7;
+    let cardScaleFactor = 0.7;
 
     // three.js
-    const camera = new THREE.PerspectiveCamera(40);
-    camera.position.set(0, 0, 2.5);
-    camera.lookAt(0, 0, 0);
-
-    const scene = new THREE.Scene();
     const renderer = new THREE.WebGLRenderer({
       antialias: true,
       alpha: true,
       canvas: document.getElementsByClassName(styles.canvas)[0],
     });
 
+    const camera = new THREE.PerspectiveCamera(40);
+    camera.position.set(0, 0, 2.5);
+    camera.lookAt(0, 0, 0);
+
+    const scene = new THREE.Scene();
+    const stage = new THREE.Object3D();
+    const background = new THREE.Object3D();
+
     const resize = () => {
       renderer.setSize(window.innerWidth, window.innerHeight);
       renderer.setPixelRatio(window.devicePixelRatio);
       camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
+
+      cardScaleFactor = window.innerWidth < 425 ? 0.45 : (window.innerWidth < 768 ? 0.6 : 0.75);
+      stage.scale.set(cardScaleFactor, cardScaleFactor, cardScaleFactor); 
     }
     resize();
     window.addEventListener('resize', resize);
     
-    const stage = new THREE.Object3D();
-    const background = new THREE.Object3D();
     scene.add(stage);
     scene.add(background);
 
@@ -107,8 +111,6 @@ export default function Home() {
     cardSideMesh.position.set(-1.6545 / 2, -0.5, -0.008);
     
     stage.add(cardFrontMesh, cardBackMesh, cardSideMesh);
-
-    stage.scale.set(cardScaleFactor, cardScaleFactor, cardScaleFactor);
     stage.quaternion.setFromAxisAngle(new THREE.Vector3(-0.25, 1, 0).normalize(), 0.25 * Math.PI);
     background.add(backgroundIcosphereMesh);
 
