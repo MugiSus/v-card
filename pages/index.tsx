@@ -40,9 +40,6 @@ export default function Home() {
     scene.add(stage);
     scene.add(background);
 
-    const axisAngle = 40 * Math.PI / 180;
-    const axisVector = new THREE.Vector3(Math.sin(axisAngle), Math.cos(axisAngle), 0);
-
     const x = 0;
     const y = 0;
     const w = 1;
@@ -84,7 +81,7 @@ export default function Home() {
       })
     );
     cardFrontMesh.scale.set(1.6545, 1, 1);
-    cardFrontMesh.position.set(-1.6545 / 2, -0.5, 0.0071);
+    cardFrontMesh.position.set(-1.6545 / 2, -0.5, 0.0082);
 
     const cardBackMesh = new THREE.Mesh(
       cardGeometry,
@@ -94,12 +91,12 @@ export default function Home() {
       })
     );
     cardBackMesh.scale.set(1.6545, 1, 1);
-    cardBackMesh.position.set(1.6545 / 2, -0.5, -0.0071);
+    cardBackMesh.position.set(1.6545 / 2, -0.5, -0.0082);
     cardBackMesh.rotation.set(0, Math.PI, 0);
     
     const cardSideMesh = new THREE.Mesh(
       new THREE.ExtrudeGeometry(shape, {
-        depth: 0.014,
+        depth: 0.016,
         bevelEnabled: false,
       }),
       new THREE.MeshBasicMaterial({
@@ -107,7 +104,7 @@ export default function Home() {
       })
     );
     cardSideMesh.scale.set(1.6545, 1, 1);
-    cardSideMesh.position.set(-1.6545 / 2, -0.5, -0.007);
+    cardSideMesh.position.set(-1.6545 / 2, -0.5, -0.008);
     
     stage.add(cardFrontMesh, cardBackMesh, cardSideMesh);
 
@@ -126,8 +123,6 @@ export default function Home() {
 
     const animate = (time: number) => {
       const rad = time / 5000 * Math.PI / 2;
-      // background.quaternion.setFromAxisAngle(axisVector, rad * 0.25);
-      // stage.quaternion.setFromAxisAngle(new THREE.Vector3(0, 1, 0.2).normalize(), rad);
 
       cardYPos += (0.01 - cardYPos) * 0.04;
       stage.position.set(0, cardYPos + Math.sin(rad * 4) * 0.01, 0);
