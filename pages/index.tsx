@@ -165,7 +165,7 @@ export default function Home() {
       {
         embed === 'true' ? (
           <span className={`${inter.className} ${styles.fullScreenIcon}`} onClick={requestFullScreen}>
-            {fullScreen ? "<--" : "view in fullscreen ->"}
+            {fullScreen ? "<--- exit" : "view in fullscreen ->"}
           </span>
         ) : (
           <div className={`${inter.className} ${styles.mugisusComComtainer}`} onClick={redirectHome}>
