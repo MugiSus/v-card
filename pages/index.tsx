@@ -1,6 +1,8 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import Head from 'next/head'
+import { useRouter } from 'next/router';
 import { Inter } from '@next/font/google'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import * as THREE from 'three'
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import styles from '../styles/Home.module.css'
@@ -8,6 +10,11 @@ import styles from '../styles/Home.module.css'
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
+  const router = useRouter();
+  const { id, embed } = router.query;
+
+  const [fullScreen, setFullScreen] = useState(false);
+
   useEffect(() => {
     const cardFrontImagePath = location.origin + location.pathname + '/mugisus-business-card-front-22aq.png';
     const cardBackImagePath = location.origin + location.pathname + '/mugisus-business-card-back-22aq.png';
@@ -20,7 +27,7 @@ export default function Home() {
     });
 
     const camera = new THREE.PerspectiveCamera(40);
-    camera.position.set(0, 0, 2.5);
+    camera.position.set(0, 0, 5);
     camera.lookAt(0, 0, 0);
 
     const scene = new THREE.Scene();
@@ -33,7 +40,7 @@ export default function Home() {
       camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
 
-      const cardScaleFactor = window.innerWidth < 425 ? 0.5 : (window.innerWidth < 768 ? 0.65 : 0.8);
+      const cardScaleFactor = window.innerWidth < 425 ? 0.8 : (window.innerWidth < 768 ? 1.2 : 1.6);
       stage.scale.set(cardScaleFactor, cardScaleFactor, cardScaleFactor); 
     }
     resize();
@@ -63,7 +70,7 @@ export default function Home() {
     const cardGeometry = new THREE.ShapeGeometry(shape, 8);
 
     const backgroundIcosphereMesh = new THREE.Mesh(
-      new THREE.IcosahedronGeometry(2.5, 6),
+      new THREE.IcosahedronGeometry(6, 6),
       new THREE.MeshBasicMaterial({
         color: 0xb0b0b0,
         wireframe: true,
@@ -132,10 +139,18 @@ export default function Home() {
     }
 
     renderer.setAnimationLoop(animate);
-  }, [])
+  }, [router.isReady])
 
   const redirectHome = () => {
     window.top!.location.href = 'https://mugisus.com';
+  }
+
+  const requestFullScreen = () => {
+    if (fullScreen) 
+      document.exitFullscreen();
+    else
+      document.body.requestFullscreen();
+    setFullScreen(!fullScreen);
   }
 
   return (
@@ -147,10 +162,16 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <canvas className={styles.canvas} />
-      <div className={styles.mugisusComComtainer} onClick={redirectHome}>
-        <span className={`${inter.className} ${styles.mugisusComArrow}`}>{"<-"}</span>
-        <span className={`${inter.className} ${styles.mugisusComTitle}`}>MugiSus.com</span>
-      </div>
+      {
+        embed === 'true' ? (
+          <span className={`material-symbols-outlined ${styles.fullScreenIcon}`} onClick={requestFullScreen}>{fullScreen ? "fullscreen_exit" : "fullscreen"}</span>
+        ) : (
+          <div className={`${inter.className} ${styles.mugisusComComtainer}`} onClick={redirectHome}>
+            <span className={styles.mugisusComArrow}>{"<-"}</span>
+            <span className={styles.mugisusComTitle}>MugiSus.com</span>
+          </div>
+        )
+      }
     </main>
   )
 }

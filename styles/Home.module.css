@@ -7,6 +7,14 @@
   z-index: -99999;
 }
 
+.fullScreenIcon {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.6rem;
+  font-size: 2.4rem;
+  cursor: pointer;
+}
+
 .mugisusComComtainer {
   display: inline-flex;
   justify-content: center;
@@ -15,6 +23,7 @@
   margin: 0.2rem 0.2rem 0 0.5rem;
   gap: 0.5rem;
   cursor: pointer;
+  animation: fadein 2s ease-out 1s both;
 }
 
 .mugisusComArrow {
@@ -27,4 +36,13 @@
   font-size: 1.5rem;
   font-weight: 300;
   z-index: 0;
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
