@@ -33,16 +33,16 @@ export default function Home() {
     const scene = new THREE.Scene();
     const stage = new THREE.Object3D();
     const background = new THREE.Object3D();
-    const ambientLight = new THREE.AmbientLight(0x202020); // soft white ambientLight
-    const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
+    const ambientLight = new THREE.AmbientLight(0x808080); // soft white ambientLight
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 0.6);
     const directionalLightFront = directionalLight.clone();
     const directionalLightBack = directionalLight.clone();
     const directionalLightRight = directionalLight.clone();
     const directionalLightLeft = directionalLight.clone();
-    directionalLightFront.position.set(1, 0.2, 0.5);
-    directionalLightBack.position.set(-1, -0.2, -0.5);
-    directionalLightLeft.position.set(1, -0.2, 0);
-    directionalLightRight.position.set(-1, 0.2, 0);
+    directionalLightFront.position.set(0, 0.5, 0.5);
+    directionalLightBack.position.set(0, -1, 0);
+    directionalLightRight.position.set(1, 0.4, 0);
+    directionalLightLeft.position.set(-1, -0.6, 0);
 
     const resize = () => {
       renderer.setSize(window.innerWidth, window.innerHeight);
@@ -99,7 +99,7 @@ export default function Home() {
       new THREE.MeshStandardMaterial({
         map: textureCardFront,
         side: THREE.DoubleSide,
-        roughness: 0.65,
+        roughness: 0.7,
         metalness: 0.5,
       })
     );
@@ -111,8 +111,8 @@ export default function Home() {
       new THREE.MeshStandardMaterial({
         map: textureCardBack,
         side: THREE.DoubleSide,
-        roughness: 0.6,
-        metalness: 0.1,
+        roughness: 0.55,
+        metalness: 0.15,
       })
     );
     cardBackMesh.scale.set(1.6545, 1, 1);
