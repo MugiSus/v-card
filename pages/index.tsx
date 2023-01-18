@@ -164,7 +164,9 @@ export default function Home() {
       <canvas className={styles.canvas} />
       {
         embed === 'true' ? (
-          <span className={`${inter.className} ${styles.fullScreenIcon}`} onClick={requestFullScreen}>{fullScreen ? "<--" : "view in fullscreen -->"}</span>
+          <span className={`${inter.className} ${styles.fullScreenIcon}`} onClick={requestFullScreen}>
+            {fullScreen ? "<--" : "view in fullscreen -->"}
+          </span>
         ) : (
           <div className={`${inter.className} ${styles.mugisusComComtainer}`} onClick={redirectHome}>
             <span className={styles.mugisusComArrow}>{"<-"}</span>
