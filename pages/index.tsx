@@ -33,13 +33,11 @@ export default function Home() {
     const scene = new THREE.Scene();
     const stage = new THREE.Object3D();
     const background = new THREE.Object3D();
-    const ambientLight = new THREE.AmbientLight(0xf0f0f0); // soft white ambientLight
+    const ambientLight = new THREE.AmbientLight(0xe8e8e8); // soft white ambientLight
     const directionalLightFront = new THREE.DirectionalLight(0xffffff, 0.65);
-    const directionalLightBack = new THREE.DirectionalLight(0xffffff, 0.5);
-    const directionalLightBackBottom = new THREE.DirectionalLight(0xffffff, 0.5);
-    directionalLightFront.position.set(1, 0, 1);
+    const directionalLightBack = new THREE.DirectionalLight(0xe0e0e0, 0.6);
+    directionalLightFront.position.set(1, 0.25, 1);
     directionalLightBack.position.set(-1, 0, -1);
-    directionalLightBackBottom.position.set(-1, -1.5, -1);
 
     const resize = () => {
       renderer.setSize(window.innerWidth, window.innerHeight);
@@ -108,7 +106,7 @@ export default function Home() {
       new THREE.MeshStandardMaterial({
         map: textureCardBack,
         side: THREE.DoubleSide,
-        roughness: 0.65,
+        roughness: 0.7,
         metalness: 0.5,
       })
     );
@@ -123,8 +121,8 @@ export default function Home() {
       }),
       new THREE.MeshStandardMaterial({
         color: 0xE7E2D3,
-        roughness: 0.75,
-        metalness: 0.02,
+        roughness: 0.8,
+        metalness: 0.025,
       })
     );
     cardSideMesh.scale.set(1.6545, 1, 1);
