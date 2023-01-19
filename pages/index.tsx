@@ -117,6 +117,7 @@ export default function Home() {
     const cardSideMesh = new THREE.Mesh(
       new THREE.ExtrudeGeometry(shape, {
         depth: 0.016,
+        curveSegments: 8,
         bevelEnabled: false,
       }),
       new THREE.MeshStandardMaterial({
