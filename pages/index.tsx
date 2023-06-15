@@ -3,21 +3,32 @@ import Head from 'next/head'
 import { useRouter } from 'next/router';
 import { Inter } from '@next/font/google'
 import { useEffect, useState } from 'react'
+import { intersection } from 'lodash'
+
 import * as THREE from 'three'
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+
 import styles from '../styles/Home.module.css'
+
+import cardInfos from '../data/card-infos.json'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
   const router = useRouter();
-  const { id, embed } = router.query;
+  const { embed } = router.query;
 
+  const cardIds = intersection(Object.keys(router.query), Object.keys(cardInfos))
+
+  const id = cardIds[0] ?? "22aq";
+  /* @ts-ignore */
+  const cardInfo = cardInfos[id];
   const [fullScreen, setFullScreen] = useState(false);
 
   useEffect(() => {
-    const cardFrontImagePath = location.origin + location.pathname + '/mugisus-business-card-front-22aq.png';
-    const cardBackImagePath = location.origin + location.pathname + '/mugisus-business-card-back-22aq.png';
+    const { width, height, cornerRadius, depth } = cardInfo;
+    const cardFrontImagePath = location.origin + location.pathname + cardInfo.front;
+    const cardBackImagePath = location.origin + location.pathname + cardInfo.back;
 
     // three.js
     const renderer = new THREE.WebGLRenderer({
@@ -56,13 +67,14 @@ export default function Home() {
     scene.add(ambientLight);
     scene.add(directionalLightFront, directionalLightBack);
 
+    const xr = cornerRadius / width;
+    const yr = cornerRadius / height;
+    const ratio = width / height;
+    
     const x = 0;
     const y = 0;
     const w = 1;
     const h = 1;
-    const xr = 20 / 728;
-    const yr = 20 / 440;
-
     const shape = new THREE.Shape()
       .moveTo(x, y + yr)
       .lineTo(x, y + h - yr)
@@ -98,8 +110,8 @@ export default function Home() {
         metalness: 0.5,
       })
     );
-    cardFrontMesh.scale.set(1.6545, 1, 1);
-    cardFrontMesh.position.set(-1.6545 / 2, -0.5, 0.0082);
+    cardFrontMesh.scale.set(ratio, 1, 1);
+    cardFrontMesh.position.set(-ratio / 2, -0.5, depth / 2 + 0.001);
 
     const cardBackMesh = new THREE.Mesh(
       cardGeometry,
@@ -110,13 +122,14 @@ export default function Home() {
         metalness: 0.5,
       })
     );
-    cardBackMesh.scale.set(1.6545, 1, 1);
-    cardBackMesh.position.set(1.6545 / 2, -0.5, -0.0082);
+    cardBackMesh.scale.set(ratio, 1, 1);
+    cardBackMesh.position.set(ratio / 2, -0.5, depth / -2 - 0.001);
     cardBackMesh.rotation.set(0, Math.PI, 0);
     
     const cardSideMesh = new THREE.Mesh(
       new THREE.ExtrudeGeometry(shape, {
-        depth: 0.016,
+        depth: depth,
+        curveSegments: 8,
         bevelEnabled: false,
       }),
       new THREE.MeshStandardMaterial({
@@ -125,8 +138,8 @@ export default function Home() {
         metalness: 0.025,
       })
     );
-    cardSideMesh.scale.set(1.6545, 1, 1);
-    cardSideMesh.position.set(-1.6545 / 2, -0.5, -0.008);
+    cardSideMesh.scale.set(ratio, 1, 1);
+    cardSideMesh.position.set(ratio / -2, -0.5, depth / -2);
     
     stage.add(cardFrontMesh, cardBackMesh, cardSideMesh);
     stage.quaternion.setFromAxisAngle(new THREE.Vector3(-0.25, 1, 0).normalize(), 0.25 * Math.PI);
@@ -139,7 +152,7 @@ export default function Home() {
     controls.dampingFactor = 0.04;
     controls.update();
 
-    let cardYPos = -2;
+    let cardYPos = -64;
 
     const animate = (time: number) => {
       const rad = time / 5000 * Math.PI / 2;
