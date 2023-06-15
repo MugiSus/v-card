@@ -25,6 +25,7 @@ export default function Home() {
     const id = cardIds[0] ?? "22aq";
     /* @ts-ignore */
     const cardInfo = cardInfos[id];
+    console.log(cardIds)
 
     const { width, height, cornerRadius, depth } = cardInfo;
     const cardFrontImagePath = location.origin + location.pathname + "/" + cardInfo.front;
