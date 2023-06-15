@@ -104,8 +104,8 @@ export default function Home() {
       new THREE.MeshStandardMaterial({
         map: textureCardFront,
         side: THREE.DoubleSide,
-        roughness: 0.7,
-        metalness: 0.5,
+        roughness: 0.8,
+        metalness: 0.1,
       })
     );
     cardFrontMesh.scale.set(ratio, 1, 1);
@@ -116,8 +116,8 @@ export default function Home() {
       new THREE.MeshStandardMaterial({
         map: textureCardBack,
         side: THREE.DoubleSide,
-        roughness: 0.7,
-        metalness: 0.5,
+        roughness: 0.8,
+        metalness: 0.1,
       })
     );
     cardBackMesh.scale.set(ratio, 1, 1);
