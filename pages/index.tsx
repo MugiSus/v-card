@@ -3,8 +3,11 @@ import Head from 'next/head'
 import { useRouter } from 'next/router';
 import { Inter } from '@next/font/google'
 import { useEffect, useState } from 'react'
+import { intersection } from 'lodash'
+
 import * as THREE from 'three'
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+
 import styles from '../styles/Home.module.css'
 
 import cardInfos from '../data/card-infos.json'
@@ -13,13 +16,19 @@ const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
   const router = useRouter();
-  const { id, embed } = router.query;
+  const { embed } = router.query;
 
+  const cardIds = intersection(Object.keys(router.query), Object.keys(cardInfos))
+
+  const id = cardIds[0] ?? "22aq";
+  /* @ts-ignore */
+  const cardInfo = cardInfos[id];
   const [fullScreen, setFullScreen] = useState(false);
 
   useEffect(() => {
-    const cardFrontImagePath = location.origin + location.pathname + '/22aq-front.png';
-    const cardBackImagePath = location.origin + location.pathname + '/22aq-back.png';
+    const { width, height, cornerRadius, depth } = cardInfo;
+    const cardFrontImagePath = location.origin + location.pathname + cardInfo.front;
+    const cardBackImagePath = location.origin + location.pathname + cardInfo.back;
 
     // three.js
     const renderer = new THREE.WebGLRenderer({
@@ -58,11 +67,6 @@ export default function Home() {
     scene.add(ambientLight);
     scene.add(directionalLightFront, directionalLightBack);
 
-    const width = 728;
-    const height = 440;
-    const cornerRadius = 20;
-
-    const depth = 0.016;
     const xr = cornerRadius / width;
     const yr = cornerRadius / height;
     const ratio = width / height;
