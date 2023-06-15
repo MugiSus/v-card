@@ -27,8 +27,8 @@ export default function Home() {
 
   useEffect(() => {
     const { width, height, cornerRadius, depth } = cardInfo;
-    const cardFrontImagePath = location.origin + location.pathname + cardInfo.front;
-    const cardBackImagePath = location.origin + location.pathname + cardInfo.back;
+    const cardFrontImagePath = location.origin + location.pathname + "/" + cardInfo.front;
+    const cardBackImagePath = location.origin + location.pathname + "/" + cardInfo.back;
 
     // three.js
     const renderer = new THREE.WebGLRenderer({
