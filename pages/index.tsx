@@ -152,13 +152,12 @@ export default function Home() {
     controls.dampingFactor = 0.04;
     controls.update();
 
-    let cardYPos = -10;
+    let cardYPos = -64;
 
     const animate = (time: number) => {
       const rad = time / 5000 * Math.PI / 2;
 
-      if (time > 500)
-        cardYPos += (0.01 - cardYPos) * 0.04;
+      cardYPos += (0.01 - cardYPos) * 0.04;
       stage.position.set(0, cardYPos + Math.sin(rad * 4) * 0.01, 0);
 
       controls.update();
