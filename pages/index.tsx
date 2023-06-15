@@ -126,12 +126,8 @@ export default function Home() {
     
     const cardSideMesh = new THREE.Mesh(
       new THREE.ExtrudeGeometry(shape, {
-<<<<<<< Updated upstream
-        depth: 0.016,
-=======
         depth: depth,
         curveSegments: 8,
->>>>>>> Stashed changes
         bevelEnabled: false,
       }),
       new THREE.MeshStandardMaterial({
