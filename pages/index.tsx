@@ -22,7 +22,7 @@ export default function Home() {
   
   useEffect(() => {
     const cardIds = intersection(Object.keys(router.query), Object.keys(cardInfos))
-    const id = cardIds[0] ?? "22aq";
+    const id = cardIds[0] ?? "2306";
     /* @ts-ignore */
     const cardInfo = cardInfos[id];
     console.log(cardIds)
