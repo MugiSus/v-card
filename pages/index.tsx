@@ -15,13 +15,11 @@ export default function Home() {
   const router = useRouter();
   const { id, embed } = router.query;
 
-  console.log(id, embed)
-
   const [fullScreen, setFullScreen] = useState(false);
 
   useEffect(() => {
-    const cardFrontImagePath = location.origin + location.pathname + '/mugisus-business-card-front-22aq.png';
-    const cardBackImagePath = location.origin + location.pathname + '/mugisus-business-card-back-22aq.png';
+    const cardFrontImagePath = location.origin + location.pathname + '/22aq-front.png';
+    const cardBackImagePath = location.origin + location.pathname + '/22aq-back.png';
 
     // three.js
     const renderer = new THREE.WebGLRenderer({
