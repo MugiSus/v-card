@@ -15,17 +15,17 @@ import cardInfos from '../data/card-infos.json'
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
-  const router = useRouter();
-  const { embed } = router.query;
-
-  const cardIds = intersection(Object.keys(router.query), Object.keys(cardInfos))
-
-  const id = cardIds[0] ?? "22aq";
-  /* @ts-ignore */
-  const cardInfo = cardInfos[id];
   const [fullScreen, setFullScreen] = useState(false);
 
+  const router = useRouter();
+  const { embed } = router.query;
+  
   useEffect(() => {
+    const cardIds = intersection(Object.keys(router.query), Object.keys(cardInfos))
+    const id = cardIds[0] ?? "22aq";
+    /* @ts-ignore */
+    const cardInfo = cardInfos[id];
+
     const { width, height, cornerRadius, depth } = cardInfo;
     const cardFrontImagePath = location.origin + location.pathname + "/" + cardInfo.front;
     const cardBackImagePath = location.origin + location.pathname + "/" + cardInfo.back;
