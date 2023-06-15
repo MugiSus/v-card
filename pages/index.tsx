@@ -18,14 +18,11 @@ export default function Home() {
   const [fullScreen, setFullScreen] = useState(false);
 
   const router = useRouter();
-  const { embed } = router.query;
+  const { id, embed } = router.query;
   
   useEffect(() => {
-    const cardIds = intersection(Object.keys(router.query), Object.keys(cardInfos))
-    const id = cardIds[0] ?? "2306";
     /* @ts-ignore */
-    const cardInfo = cardInfos[id];
-    console.log(cardIds)
+    const cardInfo = cardInfos[id] ?? cardInfos["22aq"];
 
     const { width, height, cornerRadius, depth } = cardInfo;
     const cardFrontImagePath = location.origin + location.pathname + "/" + cardInfo.front;
