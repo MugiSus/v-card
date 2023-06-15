@@ -1,0 +1,10 @@
+{
+  "22aq": {
+    "height": 728,
+    "width": 440,
+    "corner_radius": 20,
+    "front": "22aq-front.png",
+    "back": "22aq-back.png",
+    "depth": 0.08
+  }
+}
