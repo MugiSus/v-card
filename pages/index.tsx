@@ -25,8 +25,8 @@ export default function Home() {
     const cardInfo = cardInfos[id] ?? cardInfos["22aq"];
 
     const { width, height, cornerRadius, depth } = cardInfo;
-    const cardFrontImagePath = location.origin + location.pathname + "/" + cardInfo.front;
-    const cardBackImagePath = location.origin + location.pathname + "/" + cardInfo.back;
+    const cardFrontImagePath = "./image/" + cardInfo.front;
+    const cardBackImagePath = "./image/" + cardInfo.back;
 
     // three.js
     const renderer = new THREE.WebGLRenderer({
