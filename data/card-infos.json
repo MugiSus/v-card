@@ -3,16 +3,16 @@
     "height": 440,
     "width": 728,
     "cornerRadius": 20,
-    "front": "./image/mugisus-busieness-card-22aq-front.png",
-    "back": "./image/mugisus-busieness-card-22aq-back.png",
+    "front": "./mugisus-busieness-card-22aq-front.png",
+    "back": "./mugisus-busieness-card-22aq-back.png",
     "depth": 0.008
   },
   "2306": {
     "height": 300,
     "width": 900,
     "cornerRadius": 10,
-    "front": "./image/mugisus-busieness-card-2306-front.png",
-    "back": "./image/mugisus-busieness-card-2306-back.png",
+    "front": "./mugisus-busieness-card-2306-front.png",
+    "back": "./mugisus-busieness-card-2306-back.png",
     "depth": 0.008
   }
 }
